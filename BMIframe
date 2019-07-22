@@ -1,0 +1,18 @@
+package BMI;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class BMIframe extends JFrame {
+    public BMIframe(){
+        super("Kalkulator BMI");
+
+        BMI.BMIpanel bmiPanel = new BMI.BMIpanel ();
+        add(bmiPanel);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        bmiPanel.setPreferredSize(new Dimension(600,600));
+        setVisible(true);
+        pack();
+    }
+}
