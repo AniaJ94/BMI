@@ -1,0 +1,138 @@
+package BMI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.*;
+
+public class BMIpanel extends JPanel implements ActionListener {
+    public static final int HEIGHT = 600;
+    public static final int WIDTH = 600;
+
+    private JTextField wzrost;
+    private JTextField waga;
+    private JLabel waga1;
+    private JLabel wzrost1;
+    private JLabel wynik;
+    private JTextField wynik_bmi;
+    private float bmi;
+    private JLabel opis;
+    private JTextField opis1;
+    private JButton oblicz;
+
+    public BMIpanel(){
+        wzrost = new JTextField(" ");
+        waga = new JTextField(" ");
+        waga1 = new JLabel(" Podaj swoją wagę: ");
+        wzrost1 = new JLabel(" Podaj swój wzrost: ");
+        wynik = new JLabel(" Twoje BMI wynosi: ");
+        wynik_bmi = new JTextField(" ");
+        opis = new JLabel(" Opis wyniku BMI: ");
+        opis1 = new JTextField(" ");
+        oblicz = new JButton( "Oblicz" );
+
+        setLayout( null );
+
+        wzrost.setBounds(250,50,80,40);
+        waga.setBounds(250,120,80,40);
+        wzrost1.setBounds(50,50,300,40);
+        waga1.setBounds(50,120,300,40);
+        wynik.setBounds(50,380,300,40);
+        wynik_bmi.setBounds(250,380,100,40);
+        opis.setBounds(50,450,200,40);
+        opis1.setBounds(250,450,200,40);
+        oblicz.setBounds(250, 230, 100,40);
+
+
+        wzrost.setFont(new java.awt.Font("Tahoma", 0, 18));
+        waga.setFont(new java.awt.Font("Tahoma", 0, 18));
+        wzrost1.setFont(new java.awt.Font("Tahoma", 0, 18));
+        waga1.setFont(new java.awt.Font("Tahoma", 0, 18));
+        wynik.setFont(new java.awt.Font("Tahoma", 0, 18));
+        wynik_bmi.setFont(new java.awt.Font("Tahoma", 0, 18));
+        opis.setFont(new java.awt.Font("Tahoma", 0, 18));
+        opis1.setFont(new java.awt.Font("Tahoma", 0, 18));
+        oblicz.setFont(new java.awt.Font("Tahoma", 0, 18));
+
+        wzrost.setHorizontalAlignment(JTextField.CENTER);
+        waga.setHorizontalAlignment(JTextField.CENTER);
+        wynik_bmi.setHorizontalAlignment(JTextField.CENTER);
+        opis1.setHorizontalAlignment(JTextField.CENTER);
+
+        wzrost.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                actionPerformed(evt);
+            }
+        });
+
+        waga.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                actionPerformed(evt);
+            }
+        });
+
+        oblicz.addActionListener(this);
+
+        wzrost.setText("0");
+        waga.setText("0");
+        wynik_bmi.setText("0");
+
+        add(wzrost);
+        add(waga);
+        add(wzrost1);
+        add(waga1);
+        add(wynik);
+        add(wynik_bmi);
+        add(opis);
+        add(opis1);
+        add(oblicz);
+
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        float bmi_wzrost = Integer.parseInt(wzrost.getText());
+        float bmi_waga = Integer.parseInt(waga.getText());
+        bmi_wzrost = bmi_wzrost/100;
+
+        bmi = bmi_waga / (bmi_wzrost*bmi_wzrost);
+
+        wynik_bmi.setText(String.valueOf(bmi));
+
+        if (bmi<18.5){
+            opis1.setText("niedowaga");
+        }
+        else if (bmi<25){
+            opis1.setText("waga prawidłowa");
+        }
+        else if (bmi<30){
+            opis1.setText("nadwaga");
+        }
+        else if (bmi<35){
+            opis1.setText("I stopień otyłości");
+        }
+        else if (bmi<40){
+            opis1.setText("II stopień otyłości");
+        }
+        else if (bmi>40){
+            opis1.setText("III stopień otyłości");
+        }
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics e) {
+        super.paintComponent(e);
+        Graphics2D g2d = (Graphics2D) e;
+
+        g2d.drawLine(0, 300, 600, 300);
+
+    }
+}
